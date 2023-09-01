@@ -74,11 +74,58 @@ def DiffUtility(str1, str2):
         for x in range(1,m+1):
             if str1[i-1] == str2[x-1]:
                 suffix[i][x] = suffix[i-1][x-1] + 1
-    result = max(result)
+            else:
+                suffix[i][x] = max(suffix[i-1][x], suffix[i][x-1])
+    
+    result = max(max(x) for x in suffix)
+    LCS = ""
+    temp_n = n #length str1
+    temp_m = m #length str2
+    while temp_n > 0 and temp_m > 0:
+        if str1[temp_n-1] == str2[temp_m-1]: 
+            LCS += str1[temp_n-1]
+            temp_n -= 1
+            temp_m -= 1
+        elif suffix[temp_n -1][temp_m] > suffix[temp_n][temp_m-1]:
+            temp_n -= 1
+        else:
+            temp_m -= 1
+    LCS = LCS[::-1]
+
+    index_str1 = 0 
+    index_str2 = 0 
+    LCSindex = 0
+    diffUtility = ""
+    while LCSindex < len(LCS) and index_str1 < n and index_str2 < m:
+        if str1[index_str1] != LCS[LCSindex]:
+            diffUtility += "-"
+            diffUtility += str1[index_str1]
+            index_str1 += 1
+        elif str2[index_str2] != LCS[LCSindex]:
+            diffUtility += ("+")
+            diffUtility += str2[index_str2]
+            index_str2 += 1
+        else:
+            diffUtility += LCS[LCSindex]
+            index_str1 += 1
+            index_str2 += 1 
+            LCSindex += 1
+    while index_str1 < n:
+        diffUtility += "-"
+        diffUtility += str1[index_str1]
+        index_str1 += 1
+    while index_str2 < m:
+        diffUtility += ("+")
+        diffUtility += str2[index_str2]
+        index_str2 += 1
+    return diffUtility
+
+
+
     
     
 
-#print(LongestCommonSubtring("ABABC","BABCA"))
-#print(subsequence([0,8,4,12,2,10,6,14,1,9,5,13,3,11]))
-#print(PatternCount("subsequence", "sue"))
-print(DiffUtility(""))
+print(LongestCommonSubtring("ABABC","BABCA"))
+print(subsequence([0,8,4,12,2,10,6,14,1,9,5,13,3,11]))
+print(PatternCount("subsequence", "sue"))
+print(DiffUtility("ZNDGT", "XZDGST"))
