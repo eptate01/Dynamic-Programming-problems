@@ -9,4 +9,6 @@ The next loop is O(N) for the while loop. O(N^2/2 + N) is simplified to O(N^2).
 The time complexity for 3 is O(N*M). The first loop is O((N+1)*(M+1)) since it is simply initializing the table. The second loop is O(N*M) for the string and pattern lengths.
 The last return statement to return the max amount is O((N+1)*(M+1)). All of these simplify to O(N*M).
 
-
+The time complexity of number 4 is O(N^2). the first three loops are the same time complexities as the first three loops of the first problem. The next loop is O(N^2) to find the longest common subsequence. 
+The loop to add the letters(line 103) at first may appear to be O(N^3), but if you look closely you can never just add to the index of LCS so it ends up being O(N^2) at worste. The last two loops are O(N).
+This makes the time complexity O(N^2) when simplified.
