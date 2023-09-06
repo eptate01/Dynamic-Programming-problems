@@ -37,10 +37,14 @@ def subsequence(arr):
     result.append(arr[maxPosition])
     lis = lis[0:maxPosition]
     maxPosition = lis.index(max(lis))
-    while maxPosition > 0 and result[-1] > arr[maxPosition]:
-        result.append(arr[maxPosition])
-        lis = lis[0:maxPosition]
-        maxPosition = lis.index(max(lis))
+    while maxPosition > 0 and sum(lis) > 0:
+        if not(result[-1] > arr[maxPosition]):
+            lis[maxPosition] = 0
+            maxPosition = lis.index(max(lis))
+        else:
+            result.append(arr[maxPosition])
+            lis = lis[0:maxPosition]
+            maxPosition = lis.index(max(lis))
 
     return result[::-1]
 
@@ -57,7 +61,7 @@ def PatternCount(str, pattern):
                 countTable[i][j] = countTable[i-1][j-1] + countTable[i-1][j]
             else:
                 countTable[i][j] = countTable[i-1][j]
-    return max(max(x) for x in countTable)
+    return countTable[-1][-1]
 
 def DiffUtility(str1, str2):
     n = len(str1)
@@ -126,6 +130,6 @@ def DiffUtility(str1, str2):
     
 
 print(LongestCommonSubtring("ABABC","BABCA"))
-print(subsequence([0,8,4,12,2,10,6,14,1,9,5,13,3,11]))
+print(subsequence([0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11]))
 print(PatternCount("subsequence", "sue"))
 print(DiffUtility("ZNDGT", "XZDGST"))

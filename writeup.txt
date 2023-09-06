@@ -1,0 +1,12 @@
+The time complexity of 1 is O(N*M). I have two for loops at the beginning, one is O(N) and the other is O(M).
+My next for loop is a nested for loop through the first string of length N and then a loop through the second string of length M.
+That nested loop is time complexity O(N*M). The last loop is an iteration over the common substring which is at worste time complexity O(N) or O(M) (whichever is shorter).
+This leaves me with O(N+M+N*M+[N or M]). We simplify that to O(N*M)
+
+The time complexity for 2 is O(N^2). The first loop I have is O(N^2/2) since you're looping through N and up to the index of N for every N.
+The next loop is O(N) for the while loop. O(N^2/2 + N) is simplified to O(N^2).
+
+The time complexity for 3 is O(N*M). The first loop is O((N+1)*(M+1)) since it is simply initializing the table. The second loop is O(N*M) for the string and pattern lengths.
+The last return statement to return the max amount is O((N+1)*(M+1)). All of these simplify to O(N*M).
+
+
